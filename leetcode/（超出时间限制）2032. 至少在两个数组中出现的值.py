@@ -16,7 +16,14 @@ class Solution(object):
                 if n3 not in res_list:
                     res_list.append(n3)
         return res_list
-
+class Solution:
+    def findLonely(self, nums: List[int]) -> List[int]:
+        res = []
+        freq = Counter(nums)   # 每个元素出现次数哈希表
+        for num in nums:
+            if freq[num-1] == 0 and freq[num+1] == 0 and freq[num] == 1:
+                res.append(num)
+        return res
 nums1 = [1,1,3,2]
 nums2 = [2,3]
 nums3 = [3]

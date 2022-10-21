@@ -17,6 +17,7 @@ class Solution(object):
             res = nums[tag]
             print(res)
         # print(nums)
+
         return res
 nums1 = [1,2]
 nums2 = [3,4]

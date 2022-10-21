@@ -3,18 +3,19 @@
 
 class Solution(object):
     def canBeIncreasing(self, nums):
+        len_len = len(nums)
         count = 0
-        if len(nums) == 2: return True
-        for i in range(len(nums)-1):
-            if nums[i] >= nums[i+1]:
+        for i in range(len_len):
+            if i == len_len - 1:
+                break
+            if nums[i] > nums[i+1]:
                 count += 1
-                if count > 1: return False
-                if i == 0:
-                    continue
-                elif nums[i] >= nums[i+2]:
-                    return False
-
-        return True
+            else:
+                continue
+        if count > 1:
+            return False
+        else:
+            return True
 
 nums = [105,924,32,968]
 ss = Solution()
