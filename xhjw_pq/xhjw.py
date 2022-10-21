@@ -1,12 +1,13 @@
 from selenium import webdriver
 from lxml import etree
 import time
-import re
 # 创建浏览器对象
 path = 'chromedriver.exe'
 browser = webdriver.Chrome(path)
 # url
-url = 'http://www.xinhuanet.com/mil/shijie.htm'
+# 世界   http://www.xinhuanet.com/mil/shijie.htm
+# 中国   http://www.mil.xinhuanet.com/zhongguo.htm
+url = 'http://www.mil.xinhuanet.com/zhongguo.htm'
 # 打开
 browser.get(url)
 time.sleep(1)
@@ -38,48 +39,26 @@ for button in button_list:
 	info_content = browser.page_source  # 获取新页面网页源码
 	tree1 = etree.HTML(info_content)
 	text_list = tree1.xpath('//div[@id="detail"]//p/text()')
-	if(len(text_list) != 0):
-		print(len(text_list))
-		for text in text_list:
-			text = text.replace(u'\xa0', '')
-			with open('./info/' + title[title_cont] + '.text', 'a', encoding='utf-8') as fp:
-				fp.write(text)
-				fp.write('\n')
-		img_list = tree1.xpath('//div[@id="detail"]/p/img/@src')
-		for img in img_list:
-			src = ''
-			current_url = browser.current_url
-			s = current_url.split('/')
-			for i in range(len(s) - 1):
-				if (i != len(s) - 1):
-					src = src + s[i] + '/'
-				else:
-					src = src + s[i]
-			img_src = src + img
-			with open('./pic/' + '图片' + '.txt', 'a', encoding='utf-8') as fp:
-				fp.write(img_src)
-				fp.write('\n')
-	else:
-		text_list = tree1.xpath('//div[@id="p-detail"]//p/text()')
-		for text in text_list:
-			text = text.replace(u'\xa0', '')
-			with open('./info/' + title[title_cont] + '.text', 'a', encoding='utf-8') as fp:
-				fp.write(text)
-				fp.write('\n')
-		img_list = tree1.xpath('//div[@id="p-detail"]/p//img/@src')
-		for img in img_list:
-			src = ''
-			current_url = browser.current_url
-			s = current_url.split('/')
-			for i in range(len(s) - 1):
-				if (i != len(s) - 1):
-					src = src + s[i] + '/'
-				else:
-					src = src + s[i]
-			img_src = src + img
-			with open('./pic/' + '图片' + '.txt', 'a', encoding='utf-8') as fp:
-				fp.write(img_src)
-				fp.write('\n')
+	print(len(text_list))
+	for text in text_list:
+		text = text.replace(u'\xa0', '')
+		with open('./info/' + title[title_cont] + '.text', 'a', encoding='utf-8') as fp:
+			fp.write(text)
+			fp.write('\n')
+	img_list = tree1.xpath('//div[@id="detail"]/p/img/@src')
+	for img in img_list:
+		src = ''
+		current_url = browser.current_url
+		s = current_url.split('/')
+		for i in range(len(s) - 1):
+			if (i != len(s) - 1):
+				src = src + s[i] + '/'
+			else:
+				src = src + s[i]
+		img_src = src + img
+		with open('./pic/' + '图片' + '.txt', 'a', encoding='utf-8') as fp:
+			fp.write(img_src)
+			fp.write('\n')
 	browser.close()  # 关闭当前页面
 	time.sleep(2)
 	browser.switch_to.window(handles[0])  # 将标识符移到首页
