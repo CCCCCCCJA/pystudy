@@ -1,4 +1,5 @@
 # Definition for a binary tree node.
+# 没有使用到二叉搜索树的相关性质
 class TreeNode(object):
     def __init__(self, val=0, left=None, right=None):
         self.val = val

@@ -1,6 +1,4 @@
 import math
-
-
 class Solution(object):
     def powerfulIntegers(self, x, y, bound):
         """
