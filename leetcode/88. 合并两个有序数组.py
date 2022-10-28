@@ -7,29 +7,40 @@ class Solution(object):
         :type n: int
         :rtype: None Do not return anything, modify nums1 in-place instead.
         """
-        num = []
+        tmpnum = nums1.copy()
+        tmpnum = tmpnum[:m]
         i = 0
         j = 0
+        index = 0
         while (i < m) & (j < n):
-            if nums1[i] == 0 | nums2[j] == 0:
-                continue
-            if nums1[i] <= nums2[j]:
-                num.append(nums1[i])
+            if tmpnum[i] == nums2[j]:
+                nums1[index] = tmpnum[i]
                 i += 1
-            else:
-                num.append(nums2[j])
+                index += 1
+                continue
+            if tmpnum[i] < nums2[j]:
+                nums1[index] = tmpnum[i]
+                i += 1
+                index += 1
+                continue
+            if tmpnum[i] > nums2[j]:
+                nums1[index] = nums2[j]
                 j += 1
-
-        print(i, j)
-        if i >= m:
-            for k in range(j, n):
-                num.append(nums2[k])
-        if j >= n:
-            for k in range(i, m):
-                num.append(nums1[k])
+                index += 1
         print(nums1)
-        for o in range(len(num)):
-            nums1[o] = num[o]
+        print(i, j)
+        if j == n:
+            tmp = tmpnum[i:len(tmpnum)]
+            print(tmp)
+            for tn in tmp:
+                nums1[index] = tn
+                index += 1
+        if i == m:
+            tmp = nums2[j:len(nums2)]
+            print(tmp)
+            for tn in tmp:
+                nums1[index] = tn
+                index += 1
         print(nums1)
         return nums1
 nums1 = [1,2,3,0,0,0]
