@@ -1,34 +1,27 @@
 class Solution(object):
     def minimumDeletions(self, nums):
-        len_nums = len(nums)
-        min_num = min(nums)
-        max_num = max(nums)
-        index_min = nums.index(min_num)
-        index_max = nums.index(max_num)
-        test = int(len_nums/2)
-        if (index_min <= int(len_nums/2)) & (index_max <= int(len_nums/2)):
-            if index_min > index_max:
-                return index_min + 1
-            else:
-                return index_max + 1
-        if (index_min >= int(len_nums/2)) & (index_max >= int(len_nums/2)):
-            if index_min < index_max:
-                return len_nums - index_min
-            else:
-                return len_nums - index_max
-        if (index_min <= int(len_nums/2)) & (index_max >= int(len_nums/2)):
-            if (len_nums - index_max + index_min + 1) > index_max:
-                return index_max + 1
-            else:
-                return len_nums - index_max + index_min + 1
-        if (index_min >= int(len_nums / 2)) & (index_max <= int(len_nums / 2)):
-            if index_max == int(len_nums / 2): return len_nums - index_max
-            if (index_max + len_nums - index_min + 1) > index_min:
-                return index_min + 1
-            else:
-                return index_max + len_nums - index_min + 1
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        maxn = max(nums)
+        minn = min(nums)
+        indexmax = nums.index(maxn)
+        indexmin = nums.index(minn)
+        print(maxn, minn, indexmax, indexmin)
+        midlle = len(nums) // 2
+        if indexmax + 1 == midlle or indexmin + 1 == midlle:
+            if indexmax < midlle and indexmin < midlle:
+                return midlle
+            elif indexmax + 1 > midlle and indexmin + 1 > midlle:
+                return
+        elif indexmax < midlle and indexmin > midlle:
+            return indexmax + 1 + len(nums) - indexmin
+        elif indexmax > midlle and indexmin < midlle:
+            return indexmin + len(nums) - indexmax
 
 
-nums = [72956,-44432,78333,31358,-96449,-24776]
+
+nums = [2,3,7,10,4,1,8,6]
 ss = Solution()
 print(ss.minimumDeletions(nums))
