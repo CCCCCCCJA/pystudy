@@ -1,23 +1,21 @@
-import math
-
-
 class Solution(object):
     def maxProduct(self, nums):
         """
         :type nums: List[int]
         :rtype: int
         """
-        sumsum = []
-        for i in range(len(nums)):
-            for j in range(1, len(nums) - i + 1):
-                print(i, j, nums[i:i+j])
-                sumsum.append(math.prod(nums[i:i+j]))
-        print(sumsum)
-        print(max(sumsum))
-        return max(sumsum)
+        res = -101
+        maxn = max(nums)
+        for i in range(1, len(nums)):
+            tmp = nums[i] * nums[i-1]
+            if tmp > res:
+                res = tmp
+        # print(res)
+        if maxn > res:
+            res = maxn
+        return res
 
 
-
-nums = [2, 3, -1, 4]
+nums = [-3, -4]
 ss = Solution()
-ss.maxProduct(nums)
+print(ss.maxProduct(nums))

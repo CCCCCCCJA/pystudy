@@ -5,11 +5,14 @@ class Solution(object):
         :rtype: List[int]
         """
         res = []
-        for i in range(1, num+2//2+1):
+        tmp = int(num ** 0.5)
+        print(tmp)
+        for i in range(1, tmp):
             if (num+1)//i == (num+1)/i:
                 res.append([i, (num+1)//i])
             elif (num+2)//i == (num+2)/i:
                 res.append([i, (num + 2) // i])
+        print(res)
         resres = []
         if len(res) == 0:
             return []
